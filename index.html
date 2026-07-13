@@ -112,7 +112,7 @@
 
   <div class="topbar">
     <div class="brand"><span class="leaf">●</span> <span data-chrome="app.title"></span></div>
-    <span class="ver">v2.0</span>
+    <span class="ver">v2.1</span>
     <div class="spacer"></div>
     <span class="ver" id="saveStatus" style="opacity:.75"></span><button class="btn sm" id="backupBtn" data-chrome="backup.btn" style="margin-right:2px"></button><button class="btn sm" id="exportBtn" data-chrome="export.btn" style="margin-right:2px"></button><span class="seg" id="themeSeg"><button data-theme-set="light" data-chrome="toggle.theme.light"></button><button data-theme-set="dark" data-chrome="toggle.theme.dark"></button></span>
     <span class="seg" id="langSeg"><button data-lang-set="en">EN</button><button data-lang-set="zh">中文</button></span>
@@ -1193,7 +1193,7 @@ async function exportActive(){
 }
 
 /* ===== Google Drive backup ===== */
-const GOOGLE_CLIENT_ID="PASTE_YOUR_GOOGLE_CLIENT_ID_HERE.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID="957283380777-kug9ui3jb8npj8ijdskolmj1k3m52kss.apps.googleusercontent.com";
 const DRIVE_SCOPE="https://www.googleapis.com/auth/drive.file";
 const DRIVE_FOLDER="Life Tracker";
 let _driveToken=null,_tokenClient=null,_driveFolderId=null;
