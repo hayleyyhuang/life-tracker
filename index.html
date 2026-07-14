@@ -112,7 +112,7 @@
 
   <div class="topbar">
     <div class="brand"><span class="leaf">●</span> <span data-chrome="app.title"></span></div>
-    <span class="ver">v2.6</span>
+    <span class="ver">v2.7</span>
     <div class="spacer"></div>
     <span class="ver" id="saveStatus" style="opacity:.75"></span><button class="btn sm" id="backupBtn" data-chrome="backup.btn" style="margin-right:2px"></button><button class="btn sm" id="exportBtn" data-chrome="export.btn" style="margin-right:2px"></button><span class="seg" id="themeSeg"><button data-theme-set="light" data-chrome="toggle.theme.light"></button><button data-theme-set="dark" data-chrome="toggle.theme.dark"></button></span>
     <span class="seg" id="langSeg"><button data-lang-set="en">EN</button><button data-lang-set="zh">中文</button></span>
@@ -930,7 +930,6 @@ function reviewSection(){
       <td class="l">${i.name||""}${i.brand?`<div class="sub">${i.brand}</div>`:""}</td>
       <td class="l" style="white-space:nowrap"><button class="btn sm ghost" data-edit="${i.id}">${t("action.edit")}</button> <button class="btn sm ghost" data-weight="${i.id}">${t("action.weight")}</button></td>
       <td class="l">${lastDate(i)?fmtDate(lastDate(i)):"—"}</td>
-      <td class="num">${cons==null?"—":cons+" "+u}</td>
       <td class="num">${lastC==null?"—":lastC+" "+u}</td>
       <td class="l">${pcell}</td>
       <td>${i.inPan?`<span class="pill pan">${t("pan.yes")}</span>`:`<span class="sub">${t("pan.no")}</span>`}</td>
@@ -949,7 +948,7 @@ function reviewSection(){
       <label class="field">${t("review.show")}<select id="pageSize">${[15,25,50,100].map(n=>`<option value="${n}" ${state.pageSize===n?"selected":""}>${n}</option>`).join("")}<option value="all" ${state.pageSize==="all"?"selected":""}>${t("review.all")}</option></select></label>
     </div>
     ${rows.length?`<div class="table-wrap"><table><thead><tr>
-      <th class="l">${t("f.name")}</th><th class="l"></th><th class="l">${t("f.lastweighed")}</th><th>${t("f.consumed")}</th><th>${t("f.lastcons")}</th><th class="l">${t("f.progress")}</th><th class="l">${t("f.inpan")}</th><th class="l">${t("f.status")}</th><th class="l">${t("f.category")}</th><th>${t("f.cost")}</th>
+      <th class="l">${t("f.name")}</th><th class="l"></th><th class="l">${t("f.lastweighed")}</th><th>${t("f.lastcons")}</th><th class="l">${t("f.progress")}</th><th class="l">${t("f.inpan")}</th><th class="l">${t("f.status")}</th><th class="l">${t("f.category")}</th><th>${t("f.cost")}</th>
     </tr></thead><tbody>${body}</tbody></table></div>
     <div style="display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap">
       <button class="btn sm" id="pgPrev" ${state.page<=0?"disabled":""}>${t("pg.prev")}</button>
@@ -975,8 +974,7 @@ function editModal(){
       <label class="field">${t("f.purchased")}<input id="e_purchased" value="${ymToInput(i.purchased)}" placeholder="YYYYMM"></label>
       <label class="field">${t("f.usedup")}<input id="e_usedup" value="${ymToInput(i.usedUp)}" placeholder="YYYYMM · ${t("usedup.hint")}"></label>
       <label class="field">${t("f.worig")}<input type="number" step="0.1" id="e_worig" value="${i.weightOrig??""}"></label>
-      <label class="field">${t("f.net")}<input type="number" step="0.1" id="e_net" value="${i.netWeight??""}" placeholder="${t("f.nethint")}"></label>
-      <label class="field">${t("f.unit")}<input id="e_unit" value="${esc(i.unit)}"></label>
+      <label class="field">${t("f.net")}<span style="display:flex;gap:6px"><input type="number" step="0.1" id="e_net" value="${i.netWeight??""}" placeholder="${t("f.nethint")}" style="flex:1"><select id="e_unit" style="max-width:88px">${["ml","g","oz"].map(x=>`<option value="${x}" ${(i.unit||"g")===x?"selected":""}>${x}</option>`).join("")}</select></span></label>
       <label class="field checkfield"><input type="checkbox" id="e_inpan" ${i.inPan?"checked":""}> ${t("f.inpanq")}</label>
     </div>
     <div class="row" style="display:flex;gap:10px;align-items:center;margin-top:16px">
