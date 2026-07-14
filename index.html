@@ -112,7 +112,7 @@
 
   <div class="topbar">
     <div class="brand"><span class="leaf">●</span> <span data-chrome="app.title"></span></div>
-    <span class="ver">v2.2</span>
+    <span class="ver">v2.6</span>
     <div class="spacer"></div>
     <span class="ver" id="saveStatus" style="opacity:.75"></span><button class="btn sm" id="backupBtn" data-chrome="backup.btn" style="margin-right:2px"></button><button class="btn sm" id="exportBtn" data-chrome="export.btn" style="margin-right:2px"></button><span class="seg" id="themeSeg"><button data-theme-set="light" data-chrome="toggle.theme.light"></button><button data-theme-set="dark" data-chrome="toggle.theme.dark"></button></span>
     <span class="seg" id="langSeg"><button data-lang-set="en">EN</button><button data-lang-set="zh">中文</button></span>
@@ -795,13 +795,13 @@ const STRINGS={
     "app.title":"Project Pan","demo.note":"Your imported products are loaded here (127 items). Costs are rough estimates and purchase dates are blank — edit any item to correct. Changes aren't saved in this preview.",
     "toggle.theme.light":"Light","toggle.theme.dark":"Dark",
     "sec.input.title":"Add an item","sec.review.title":"Review & edit","sec.insights.title":"Insights",
-    "f.name":"Item","f.category":"Category","f.brand":"Brand","f.qty":"Qty","f.cost":"Cost","f.purchased":"Purchased","f.usedup":"Used up","f.status":"Status","f.weight":"Weight left","f.worig":"Original weight","f.unit":"Unit","f.inpan":"In pan","f.inpanq":"In project pan",
+    "f.name":"Item","f.category":"Category","f.brand":"Brand","f.qty":"Qty","f.cost":"Cost","f.purchased":"Purchased","f.usedup":"Used up","f.status":"Status","f.weight":"Weight left","f.worig":"Original weight","f.unit":"Unit","f.net":"Product weight (label)","f.lastweighed":"Last weighed","f.consumed":"Consumed to date","f.lastcons":"Latest use","f.progress":"Progress","f.nethint":"e.g. 30 for a 30ml product","f.inpan":"In pan","f.inpanq":"In project pan",
     "cat.Skincare":"Skincare","cat.Makeup":"Makeup","cat.Toiletries":"Toiletries","cat.Haircare":"Haircare","cat.Fragrance":"Fragrance","cat.Other":"Other",
     "st.use":"In use","st.done":"Finished","pan.yes":"In pan","pan.no":"—",
     "action.add":"Add item","action.edit":"Edit","action.delete":"Delete","action.save":"Save","action.cancel":"Cancel","action.weight":"Weight","action.close":"Close",
-    "search.ph":"Search","review.show":"Show","review.all":"All","review.showing":"Showing {n} of {m}","confirm.delete":"Delete this item?","empty":"No items match.","usedup.hint":"blank if still in use",
+    "search.ph":"Search","review.show":"Show","review.all":"All","review.showing":"Showing {n} of {m}","pg.prev":"Previous","pg.next":"Next","pg.of":"Page {a} of {b}","confirm.delete":"Delete this item?","empty":"No items match.","usedup.hint":"blank if still in use",
     "filter.cat":"Category","filter.status":"Status","filter.pan":"In pan","filter.all":"All","filter.inpan":"In pan","filter.notpan":"Not in pan",
-    "sort.by":"Sort by","sort.purchased":"Purchased","sort.usedup":"Used up","sort.cost":"Cost","sort.name":"Name","sort.remaining":"Weight left","sort.dir":"Direction",
+    "sort.by":"Sort by","sort.purchased":"Purchased","sort.usedup":"Used up","sort.cost":"Cost","sort.name":"Name","sort.remaining":"Progress","sort.dir":"Direction",
     "view.month":"Monthly","view.year":"Yearly",
     "kpi.inuse":"In use","kpi.finished":"Finished (panned)","kpi.totalspent":"Total spent","kpi.spentYr":"Spent this year","kpi.stash":"Unfinished stash value","kpi.pannedYr":"Panned this year","kpi.items":"items",
     "bc.title":"Bought vs consumed","bc.period":"Period","bc.bought":"Bought","bc.boughtcost":"Spend","bc.finished":"Finished","bc.finishedcost":"Finished value","bc.netqty":"Net qty","bc.netval":"Net value",
@@ -812,13 +812,13 @@ const STRINGS={
     "app.title":"消耗计划","demo.note":"已导入你的产品（127 件）。花费为粗略估计，购买日期留空 — 可编辑任意物品进行修正。此预览不会保存改动。",
     "toggle.theme.light":"浅色","toggle.theme.dark":"深色",
     "sec.input.title":"添加物品","sec.review.title":"查看与编辑","sec.insights.title":"分析洞察",
-    "f.name":"物品","f.category":"类别","f.brand":"品牌","f.qty":"数量","f.cost":"花费","f.purchased":"购买","f.usedup":"用完","f.status":"状态","f.weight":"剩余量","f.worig":"原始重量","f.unit":"单位","f.inpan":"计划中","f.inpanq":"加入消耗计划",
+    "f.name":"物品","f.category":"类别","f.brand":"品牌","f.qty":"数量","f.cost":"花费","f.purchased":"购买","f.usedup":"用完","f.status":"状态","f.weight":"剩余量","f.worig":"原始重量","f.unit":"单位","f.net":"产品净含量（标示）","f.lastweighed":"最近称重","f.consumed":"累计消耗","f.lastcons":"最近用量","f.progress":"进度","f.nethint":"例如 30ml 产品填 30","f.inpan":"计划中","f.inpanq":"加入消耗计划",
     "cat.Skincare":"护肤","cat.Makeup":"彩妆","cat.Toiletries":"洗护用品","cat.Haircare":"护发","cat.Fragrance":"香水","cat.Other":"其他",
     "st.use":"使用中","st.done":"已用完","pan.yes":"计划中","pan.no":"—",
     "action.add":"添加物品","action.edit":"编辑","action.delete":"删除","action.save":"保存","action.cancel":"取消","action.weight":"重量","action.close":"关闭",
-    "search.ph":"搜索","review.show":"显示","review.all":"全部","review.showing":"显示 {n} / {m}","confirm.delete":"删除这个物品？","empty":"没有匹配的物品。","usedup.hint":"仍在使用请留空",
+    "search.ph":"搜索","review.show":"显示","review.all":"全部","review.showing":"显示 {n} / {m}","pg.prev":"上一页","pg.next":"下一页","pg.of":"第 {a} 页 / 共 {b} 页","confirm.delete":"删除这个物品？","empty":"没有匹配的物品。","usedup.hint":"仍在使用请留空",
     "filter.cat":"类别","filter.status":"状态","filter.pan":"计划","filter.all":"全部","filter.inpan":"计划中","filter.notpan":"未加入",
-    "sort.by":"排序","sort.purchased":"购买","sort.usedup":"用完","sort.cost":"花费","sort.name":"名称","sort.remaining":"剩余量","sort.dir":"方向",
+    "sort.by":"排序","sort.purchased":"购买","sort.usedup":"用完","sort.cost":"花费","sort.name":"名称","sort.remaining":"进度","sort.dir":"方向",
     "view.month":"按月","view.year":"按年",
     "kpi.inuse":"使用中","kpi.finished":"已用完","kpi.totalspent":"总花费","kpi.spentYr":"今年花费","kpi.stash":"未用完库存价值","kpi.pannedYr":"今年用完","kpi.items":"件",
     "bc.title":"购买 vs 消耗","bc.period":"时间","bc.bought":"购买","bc.boughtcost":"花费","bc.finished":"用完","bc.finishedcost":"用完价值","bc.netqty":"净数量","bc.netval":"净值",
@@ -829,7 +829,7 @@ const STRINGS={
 const t=(k,v)=>{let s=(STRINGS[APP.lang]&&STRINGS[APP.lang][k])||STRINGS.en[k]||k;if(v)for(const x in v)s=s.replace("{"+x+"}",v[x]);return s;};
 
 /* ===== state ===== */
-const state={theme:"light",lang:"en",search:"",pageSize:15,edit:null,weightItem:null,view:"month",nextId:1000,
+const state={theme:"light",lang:"en",search:"",pageSize:15,page:0,edit:null,weightItem:null,view:"month",nextId:1000,
   filterCat:"all",filterStatus:"all",filterPan:"all",sortBy:"purchased",sortDir:"desc",
   bcFilterCat:"all",bcSortBy:"period",bcSortDir:"desc",
   wkFilterCat:"all",wkSortDir:"desc",wkFreq:"week",
@@ -851,6 +851,12 @@ function liveItems(){return state.doc.items.filter(i=>!i.deleted);}
 function thisYear(){return String(new Date().getFullYear());}
 function sortedLog(i){return (i.weightLog||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));}
 function currentWeight(i){const l=sortedLog(i);return l.length?l[l.length-1].weight:(i.weightOrig??null);}
+function firstWeight(i){const l=sortedLog(i);return l.length?l[0].weight:(i.weightOrig??null);}
+function lastDate(i){const l=sortedLog(i);return l.length?l[l.length-1].date:null;}
+function r2(n){return n==null||isNaN(n)?null:Math.round(n*100)/100;}
+function consumedToDate(i){const f=firstWeight(i),c=currentWeight(i);if(f==null||c==null)return null;return r2(Math.max(0,f-c));}
+function lastConsumption(i){const l=sortedLog(i);if(l.length<2)return null;return r2(Math.max(0,l[l.length-2].weight-l[l.length-1].weight));}
+function progressPct(i){const c=consumedToDate(i);const net=+i.netWeight;if(c==null||!net)return null;return Math.max(0,Math.min(1,c/net));}
 function remainingPct(i){const cw=currentWeight(i);return i.weightOrig?Math.max(0,Math.min(1,(cw||0)/i.weightOrig)):null;}
 function weekMonday(dateStr){const d=new Date(dateStr+"T00:00:00");const off=(d.getDay()+6)%7;d.setDate(d.getDate()-off);return d.toISOString().slice(0,10);}
 // consumption events from consecutive readings
@@ -878,6 +884,7 @@ function inputSection(){
       <label class="field">${t("f.purchased")}<input id="i_purchased" placeholder="YYYYMM"></label>
       <label class="field">${t("f.usedup")}<input id="i_usedup" placeholder="YYYYMM · ${t("usedup.hint")}"></label>
       <label class="field">${t("f.worig")}<input type="number" step="0.1" id="i_worig"></label>
+      <label class="field">${t("f.net")}<input type="number" step="0.1" id="i_net" placeholder="${t("f.nethint")}"></label>
       <label class="field">${t("f.unit")}<input id="i_unit" value="ml"></label>
       <label class="field checkfield"><input type="checkbox" id="i_inpan"> ${t("f.inpanq")}</label>
     </div>
@@ -900,7 +907,7 @@ function filteredItems(){
     case "cost":return +i.cost||0;
     case "name":return (i.name||"").toLowerCase();
     case "usedup":return i.usedUp||"";
-    case "remaining":return remainingPct(i)==null?-1:remainingPct(i);
+    case "remaining":return progressPct(i)==null?-1:progressPct(i);
     default:return i.purchased||"";
   }};
   arr.sort((a,b)=>{const ka=key(a),kb=key(b);return ka<kb?-dir:ka>kb?dir:0;});
@@ -909,21 +916,29 @@ function filteredItems(){
 
 function reviewSection(){
   const all=filteredItems();
-  const rows=state.pageSize==="all"?all:all.slice(0,state.pageSize);
+  const per=state.pageSize==="all"?all.length||1:state.pageSize;
+  const pages=Math.max(1,Math.ceil(all.length/per));
+  if(state.page>pages-1)state.page=pages-1;
+  if(state.page<0)state.page=0;
+  const start=state.pageSize==="all"?0:state.page*per;
+  const rows=state.pageSize==="all"?all:all.slice(start,start+per);
   const body=rows.map(i=>{
-    const done=!!i.usedUp;
+    const done=!!i.usedUp;const u=i.unit||"";
+    const cons=consumedToDate(i);const lastC=lastConsumption(i);const pp=progressPct(i);
+    const pcell=pp==null?`<span class="sub">—</span>`:`<div class="wcell"><div class="bartrack"><div class="bar" style="width:${Math.round(pp*100)}%"></div></div><span class="sub">${cons} / ${i.netWeight} ${u} · ${Math.round(pp*100)}%</span></div>`;
     return `<tr>
       <td class="l">${i.name||""}${i.brand?`<div class="sub">${i.brand}</div>`:""}</td>
       <td class="l" style="white-space:nowrap"><button class="btn sm ghost" data-edit="${i.id}">${t("action.edit")}</button> <button class="btn sm ghost" data-weight="${i.id}">${t("action.weight")}</button></td>
-      <td class="l">${catLabel(i.category)}</td>
-      <td class="num">${gbp(i.cost)}</td>
-      <td class="l">${fmtMonth(i.purchased)}</td>
-      <td class="l">${fmtMonth(i.usedUp)}</td>
+      <td class="l">${lastDate(i)?fmtDate(lastDate(i)):"—"}</td>
+      <td class="num">${cons==null?"—":cons+" "+u}</td>
+      <td class="num">${lastC==null?"—":lastC+" "+u}</td>
+      <td class="l">${pcell}</td>
       <td>${i.inPan?`<span class="pill pan">${t("pan.yes")}</span>`:`<span class="sub">${t("pan.no")}</span>`}</td>
       <td><span class="pill ${done?"done":"use"}">${done?t("st.done"):t("st.use")}</span></td>
-      <td style="text-align:right;white-space:nowrap"><button class="btn sm danger" data-del="${i.id}">${t("action.delete")}</button></td>
+      <td class="l">${catLabel(i.category)}</td>
+      <td class="num">${gbp(i.cost)}</td>
     </tr>`;}).join("");
-  return `<section class="section"><h2>${t("sec.review.title")}</h2>
+  return `<section class="section" id="panReview"><h2>${t("sec.review.title")}</h2>
     <div class="rowflex">
       <label class="field" style="flex:1;min-width:140px">${t("search.ph")}<input id="searchBox" value="${state.search.replace(/"/g,"&quot;")}"></label>
       <label class="field">${t("filter.cat")}<select id="fCat">${optTag("all",t("filter.all"),state.filterCat)}${CATEGORIES.map(c=>optTag(c,catLabel(c),state.filterCat)).join("")}</select></label>
@@ -934,9 +949,15 @@ function reviewSection(){
       <label class="field">${t("review.show")}<select id="pageSize">${[15,25,50,100].map(n=>`<option value="${n}" ${state.pageSize===n?"selected":""}>${n}</option>`).join("")}<option value="all" ${state.pageSize==="all"?"selected":""}>${t("review.all")}</option></select></label>
     </div>
     ${rows.length?`<div class="table-wrap"><table><thead><tr>
-      <th class="l">${t("f.name")}</th><th class="l"></th><th class="l">${t("f.category")}</th><th>${t("f.cost")}</th><th class="l">${t("f.purchased")}</th><th class="l">${t("f.usedup")}</th><th class="l">${t("f.inpan")}</th><th class="l">${t("f.status")}</th><th></th>
+      <th class="l">${t("f.name")}</th><th class="l"></th><th class="l">${t("f.lastweighed")}</th><th>${t("f.consumed")}</th><th>${t("f.lastcons")}</th><th class="l">${t("f.progress")}</th><th class="l">${t("f.inpan")}</th><th class="l">${t("f.status")}</th><th class="l">${t("f.category")}</th><th>${t("f.cost")}</th>
     </tr></thead><tbody>${body}</tbody></table></div>
-    <div class="eyebrow" style="margin-top:10px">${t("review.showing",{n:rows.length,m:all.length})}</div>`:`<div style="color:var(--muted)">${t("empty")}</div>`}</section>`;
+    <div style="display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn sm" id="pgPrev" ${state.page<=0?"disabled":""}>${t("pg.prev")}</button>
+      <button class="btn sm" id="pgNext" ${state.page>=pages-1?"disabled":""}>${t("pg.next")}</button>
+      <span class="eyebrow" style="margin:0">${t("pg.of",{a:state.page+1,b:pages})}</span>
+      <span style="flex:1"></span>
+      <span class="eyebrow" style="margin:0">${t("review.showing",{n:rows.length,m:all.length})}</span>
+    </div>`:`<div style="color:var(--muted)">${t("empty")}</div>`}</section>`;
 }
 
 function editModal(){
@@ -954,10 +975,13 @@ function editModal(){
       <label class="field">${t("f.purchased")}<input id="e_purchased" value="${ymToInput(i.purchased)}" placeholder="YYYYMM"></label>
       <label class="field">${t("f.usedup")}<input id="e_usedup" value="${ymToInput(i.usedUp)}" placeholder="YYYYMM · ${t("usedup.hint")}"></label>
       <label class="field">${t("f.worig")}<input type="number" step="0.1" id="e_worig" value="${i.weightOrig??""}"></label>
+      <label class="field">${t("f.net")}<input type="number" step="0.1" id="e_net" value="${i.netWeight??""}" placeholder="${t("f.nethint")}"></label>
       <label class="field">${t("f.unit")}<input id="e_unit" value="${esc(i.unit)}"></label>
       <label class="field checkfield"><input type="checkbox" id="e_inpan" ${i.inPan?"checked":""}> ${t("f.inpanq")}</label>
     </div>
-    <div class="row" style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+    <div class="row" style="display:flex;gap:10px;align-items:center;margin-top:16px">
+      <button class="btn danger" id="editDelete">${t("action.delete")}</button>
+      <span style="flex:1"></span>
       <button class="btn ghost" id="editCancel">${t("action.cancel")}</button>
       <button class="btn primary" id="editSave">${t("action.save")}</button>
     </div>
@@ -974,7 +998,7 @@ function weightModal(){
     return `<tr>
       <td class="l">${fmtDate(r.date)}</td>
       <td class="num">${r.weight} ${i.unit||""}</td>
-      <td class="num ${used>0?"pos":""}">${used==null?"—":(used>0?"−"+used+" "+(i.unit||""):"—")}</td>
+      <td class="num ${used>0?"pos":""}">${used==null?"—":(used>0?"−"+r2(used)+" "+(i.unit||""):"—")}</td>
       <td style="text-align:right"><button class="btn sm danger" data-wldel="${r.date}|${r.weight}">${t("action.delete")}</button></td>
     </tr>`;}).join("");
   return `<div class="modal-back" id="weightBack"><div class="modal">
@@ -1087,17 +1111,20 @@ function wire(){
     const wo=parseFloat(document.getElementById("i_worig").value);
     doc.items.push({id:state.nextId++,name,category:document.getElementById("i_cat").value,brand:document.getElementById("i_brand").value.trim(),
       qty:parseFloat(document.getElementById("i_qty").value)||1,cost:parseFloat(document.getElementById("i_cost").value)||0,
-      purchased:purchased||"",usedUp:usedUp||null,weightOrig:isNaN(wo)?null:wo,unit:document.getElementById("i_unit").value.trim()||"ml",
+      purchased:purchased||"",usedUp:usedUp||null,weightOrig:isNaN(wo)?null:wo,netWeight:(function(){const x=parseFloat(document.getElementById("i_net").value);return isNaN(x)?null:x;})(),unit:document.getElementById("i_unit").value.trim()||"ml",
       inPan:document.getElementById("i_inpan").checked,note:"",deleted:false,weightLog:[]});
     render();
   };
-  const sb=document.getElementById("searchBox");if(sb)sb.oninput=e=>{state.search=e.target.value;render();};
-  const ps=document.getElementById("pageSize");if(ps)ps.onchange=e=>{state.pageSize=e.target.value==="all"?"all":parseInt(e.target.value,10);render();};
-  const fc=document.getElementById("fCat");if(fc)fc.onchange=e=>{state.filterCat=e.target.value;render();};
-  const fs=document.getElementById("fStatus");if(fs)fs.onchange=e=>{state.filterStatus=e.target.value;render();};
-  const fp=document.getElementById("fPan");if(fp)fp.onchange=e=>{state.filterPan=e.target.value;render();};
-  const so=document.getElementById("sortBy");if(so)so.onchange=e=>{state.sortBy=e.target.value;render();};
-  const sd=document.getElementById("sortDir");if(sd)sd.onclick=()=>{state.sortDir=state.sortDir==="asc"?"desc":"asc";render();};
+  const sb=document.getElementById("searchBox");if(sb)sb.oninput=e=>{state.search=e.target.value;state.page=0;render();};
+  const ps=document.getElementById("pageSize");if(ps)ps.onchange=e=>{state.pageSize=e.target.value==="all"?"all":parseInt(e.target.value,10);state.page=0;render();};
+  const fc=document.getElementById("fCat");if(fc)fc.onchange=e=>{state.filterCat=e.target.value;state.page=0;render();};
+  const fs=document.getElementById("fStatus");if(fs)fs.onchange=e=>{state.filterStatus=e.target.value;state.page=0;render();};
+  const fp=document.getElementById("fPan");if(fp)fp.onchange=e=>{state.filterPan=e.target.value;state.page=0;render();};
+  const so=document.getElementById("sortBy");if(so)so.onchange=e=>{state.sortBy=e.target.value;state.page=0;render();};
+  const sd=document.getElementById("sortDir");if(sd)sd.onclick=()=>{state.sortDir=state.sortDir==="asc"?"desc":"asc";state.page=0;render();};
+  const scrollReview=()=>{const s=document.getElementById("panReview");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});};
+  const pp=document.getElementById("pgPrev");if(pp)pp.onclick=()=>{if(state.page>0){state.page--;render();scrollReview();}};
+  const pn=document.getElementById("pgNext");if(pn)pn.onclick=()=>{state.page++;render();scrollReview();};
   const bfc=document.getElementById("bcFCat");if(bfc)bfc.onchange=e=>{state.bcFilterCat=e.target.value;render();};
   const bsb=document.getElementById("bcSortBy");if(bsb)bsb.onchange=e=>{state.bcSortBy=e.target.value;render();};
   const bsd=document.getElementById("bcSortDir");if(bsd)bsd.onclick=()=>{state.bcSortDir=state.bcSortDir==="asc"?"desc":"asc";render();};
@@ -1109,6 +1136,7 @@ function wire(){
   document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>{state.edit=+b.dataset.edit;render();});
   document.querySelectorAll("[data-weight]").forEach(b=>b.onclick=()=>{state.weightItem=+b.dataset.weight;render();});
 
+  const ed=document.getElementById("editDelete");if(ed)ed.onclick=()=>{if(confirm(t("confirm.delete"))){const it=liveItems().find(x=>x.id===state.edit);if(it)it.deleted=true;state.edit=null;render();}};
   // edit modal
   const ec=document.getElementById("editCancel");if(ec)ec.onclick=()=>{state.edit=null;render();};
   const eb=document.getElementById("editBack");if(eb)eb.onclick=e=>{if(e.target===eb){state.edit=null;render();}};
@@ -1120,7 +1148,7 @@ function wire(){
     const wo=parseFloat(document.getElementById("e_worig").value);
     i.name=document.getElementById("e_name").value.trim();i.category=document.getElementById("e_cat").value;i.brand=document.getElementById("e_brand").value.trim();
     i.qty=parseFloat(document.getElementById("e_qty").value)||1;i.cost=parseFloat(document.getElementById("e_cost").value)||0;
-    i.purchased=p||"";i.usedUp=u||null;i.weightOrig=isNaN(wo)?null:wo;i.unit=document.getElementById("e_unit").value.trim()||"ml";
+    i.purchased=p||"";i.usedUp=u||null;i.weightOrig=isNaN(wo)?null:wo;const nw=parseFloat(document.getElementById("e_net").value);i.netWeight=isNaN(nw)?null:nw;i.unit=document.getElementById("e_unit").value.trim()||"ml";
     i.inPan=document.getElementById("e_inpan").checked;state.edit=null;render();
   };
 
