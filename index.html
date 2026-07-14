@@ -112,7 +112,7 @@
 
   <div class="topbar">
     <div class="brand"><span class="leaf">●</span> <span data-chrome="app.title"></span></div>
-    <span class="ver">v2.1</span>
+    <span class="ver">v2.2</span>
     <div class="spacer"></div>
     <span class="ver" id="saveStatus" style="opacity:.75"></span><button class="btn sm" id="backupBtn" data-chrome="backup.btn" style="margin-right:2px"></button><button class="btn sm" id="exportBtn" data-chrome="export.btn" style="margin-right:2px"></button><span class="seg" id="themeSeg"><button data-theme-set="light" data-chrome="toggle.theme.light"></button><button data-theme-set="dark" data-chrome="toggle.theme.dark"></button></span>
     <span class="seg" id="langSeg"><button data-lang-set="en">EN</button><button data-lang-set="zh">中文</button></span>
@@ -911,18 +911,17 @@ function reviewSection(){
   const all=filteredItems();
   const rows=state.pageSize==="all"?all:all.slice(0,state.pageSize);
   const body=rows.map(i=>{
-    const done=!!i.usedUp;const pct=remainingPct(i);const cw=currentWeight(i);
-    const wcell=pct==null?"—":`<div class="wcell"><div class="bartrack"><div class="bar" style="width:${Math.round(pct*100)}%"></div></div><span class="sub">${cw??0} / ${i.weightOrig} ${i.unit||""} · ${Math.round(pct*100)}%</span></div>`;
+    const done=!!i.usedUp;
     return `<tr>
       <td class="l">${i.name||""}${i.brand?`<div class="sub">${i.brand}</div>`:""}</td>
+      <td class="l" style="white-space:nowrap"><button class="btn sm ghost" data-edit="${i.id}">${t("action.edit")}</button> <button class="btn sm ghost" data-weight="${i.id}">${t("action.weight")}</button></td>
       <td class="l">${catLabel(i.category)}</td>
       <td class="num">${gbp(i.cost)}</td>
       <td class="l">${fmtMonth(i.purchased)}</td>
       <td class="l">${fmtMonth(i.usedUp)}</td>
-      <td class="l">${wcell}</td>
       <td>${i.inPan?`<span class="pill pan">${t("pan.yes")}</span>`:`<span class="sub">${t("pan.no")}</span>`}</td>
       <td><span class="pill ${done?"done":"use"}">${done?t("st.done"):t("st.use")}</span></td>
-      <td style="text-align:right;white-space:nowrap"><button class="btn sm ghost" data-weight="${i.id}">${t("action.weight")}</button> <button class="btn sm ghost" data-edit="${i.id}">${t("action.edit")}</button> <button class="btn sm danger" data-del="${i.id}">${t("action.delete")}</button></td>
+      <td style="text-align:right;white-space:nowrap"><button class="btn sm danger" data-del="${i.id}">${t("action.delete")}</button></td>
     </tr>`;}).join("");
   return `<section class="section"><h2>${t("sec.review.title")}</h2>
     <div class="rowflex">
@@ -935,7 +934,7 @@ function reviewSection(){
       <label class="field">${t("review.show")}<select id="pageSize">${[15,25,50,100].map(n=>`<option value="${n}" ${state.pageSize===n?"selected":""}>${n}</option>`).join("")}<option value="all" ${state.pageSize==="all"?"selected":""}>${t("review.all")}</option></select></label>
     </div>
     ${rows.length?`<div class="table-wrap"><table><thead><tr>
-      <th class="l">${t("f.name")}</th><th class="l">${t("f.category")}</th><th>${t("f.cost")}</th><th class="l">${t("f.purchased")}</th><th class="l">${t("f.usedup")}</th><th class="l">${t("f.weight")}</th><th class="l">${t("f.inpan")}</th><th class="l">${t("f.status")}</th><th></th>
+      <th class="l">${t("f.name")}</th><th class="l"></th><th class="l">${t("f.category")}</th><th>${t("f.cost")}</th><th class="l">${t("f.purchased")}</th><th class="l">${t("f.usedup")}</th><th class="l">${t("f.inpan")}</th><th class="l">${t("f.status")}</th><th></th>
     </tr></thead><tbody>${body}</tbody></table></div>
     <div class="eyebrow" style="margin-top:10px">${t("review.showing",{n:rows.length,m:all.length})}</div>`:`<div style="color:var(--muted)">${t("empty")}</div>`}</section>`;
 }
