@@ -95,6 +95,7 @@
   .pill.use{background:color-mix(in srgb,var(--accent2) 16%,var(--surface));color:var(--accent2)}
   .pill.done{background:color-mix(in srgb,var(--pos) 18%,var(--surface));color:var(--pos)}
   .pill.pan{background:color-mix(in srgb,var(--primary) 18%,var(--surface));color:var(--primary)}
+  .pill.declutter{background:color-mix(in srgb,#c98a2a 20%,var(--surface));color:#a6691a}
   .wcell{display:flex;flex-direction:column;gap:3px;min-width:120px}
   .checkfield{flex-direction:row;align-items:center;gap:8px}
   input[type=checkbox]{width:auto}
@@ -112,7 +113,7 @@
 
   <div class="topbar">
     <div class="brand"><span class="leaf">●</span> <span data-chrome="app.title"></span></div>
-    <span class="ver">v2.7</span>
+    <span class="ver">v2.8</span>
     <div class="spacer"></div>
     <span class="ver" id="saveStatus" style="opacity:.75"></span><button class="btn sm" id="backupBtn" data-chrome="backup.btn" style="margin-right:2px"></button><button class="btn sm" id="exportBtn" data-chrome="export.btn" style="margin-right:2px"></button><span class="seg" id="themeSeg"><button data-theme-set="light" data-chrome="toggle.theme.light"></button><button data-theme-set="dark" data-chrome="toggle.theme.dark"></button></span>
     <span class="seg" id="langSeg"><button data-lang-set="en">EN</button><button data-lang-set="zh">中文</button></span>
@@ -797,7 +798,7 @@ const STRINGS={
     "sec.input.title":"Add an item","sec.review.title":"Review & edit","sec.insights.title":"Insights",
     "f.name":"Item","f.category":"Category","f.brand":"Brand","f.qty":"Qty","f.cost":"Cost","f.purchased":"Purchased","f.usedup":"Used up","f.status":"Status","f.weight":"Weight left","f.worig":"Original weight","f.unit":"Unit","f.net":"Product weight (label)","f.lastweighed":"Last weighed","f.consumed":"Consumed to date","f.lastcons":"Latest use","f.progress":"Progress","f.nethint":"e.g. 30 for a 30ml product","f.inpan":"In pan","f.inpanq":"In project pan",
     "cat.Skincare":"Skincare","cat.Makeup":"Makeup","cat.Toiletries":"Toiletries","cat.Haircare":"Haircare","cat.Fragrance":"Fragrance","cat.Other":"Other",
-    "st.use":"In use","st.done":"Finished","pan.yes":"In pan","pan.no":"—",
+    "st.use":"In use","st.done":"Finished","st.declutter":"Declutter","pan.yes":"In pan","pan.no":"—",
     "action.add":"Add item","action.edit":"Edit","action.delete":"Delete","action.save":"Save","action.cancel":"Cancel","action.weight":"Weight","action.close":"Close",
     "search.ph":"Search","review.show":"Show","review.all":"All","review.showing":"Showing {n} of {m}","pg.prev":"Previous","pg.next":"Next","pg.of":"Page {a} of {b}","confirm.delete":"Delete this item?","empty":"No items match.","usedup.hint":"blank if still in use",
     "filter.cat":"Category","filter.status":"Status","filter.pan":"In pan","filter.all":"All","filter.inpan":"In pan","filter.notpan":"Not in pan",
@@ -814,7 +815,7 @@ const STRINGS={
     "sec.input.title":"添加物品","sec.review.title":"查看与编辑","sec.insights.title":"分析洞察",
     "f.name":"物品","f.category":"类别","f.brand":"品牌","f.qty":"数量","f.cost":"花费","f.purchased":"购买","f.usedup":"用完","f.status":"状态","f.weight":"剩余量","f.worig":"原始重量","f.unit":"单位","f.net":"产品净含量（标示）","f.lastweighed":"最近称重","f.consumed":"累计消耗","f.lastcons":"最近用量","f.progress":"进度","f.nethint":"例如 30ml 产品填 30","f.inpan":"计划中","f.inpanq":"加入消耗计划",
     "cat.Skincare":"护肤","cat.Makeup":"彩妆","cat.Toiletries":"洗护用品","cat.Haircare":"护发","cat.Fragrance":"香水","cat.Other":"其他",
-    "st.use":"使用中","st.done":"已用完","pan.yes":"计划中","pan.no":"—",
+    "st.use":"使用中","st.done":"已用完","st.declutter":"断舍离","pan.yes":"计划中","pan.no":"—",
     "action.add":"添加物品","action.edit":"编辑","action.delete":"删除","action.save":"保存","action.cancel":"取消","action.weight":"重量","action.close":"关闭",
     "search.ph":"搜索","review.show":"显示","review.all":"全部","review.showing":"显示 {n} / {m}","pg.prev":"上一页","pg.next":"下一页","pg.of":"第 {a} 页 / 共 {b} 页","confirm.delete":"删除这个物品？","empty":"没有匹配的物品。","usedup.hint":"仍在使用请留空",
     "filter.cat":"类别","filter.status":"状态","filter.pan":"计划","filter.all":"全部","filter.inpan":"计划中","filter.notpan":"未加入",
@@ -857,6 +858,7 @@ function r2(n){return n==null||isNaN(n)?null:Math.round(n*100)/100;}
 function consumedToDate(i){const f=firstWeight(i),c=currentWeight(i);if(f==null||c==null)return null;return r2(Math.max(0,f-c));}
 function lastConsumption(i){const l=sortedLog(i);if(l.length<2)return null;return r2(Math.max(0,l[l.length-2].weight-l[l.length-1].weight));}
 function progressPct(i){const c=consumedToDate(i);const net=+i.netWeight;if(c==null||!net)return null;return Math.max(0,Math.min(1,c/net));}
+function statusOf(i){return i.status||(i.usedUp?"done":"use");}
 function remainingPct(i){const cw=currentWeight(i);return i.weightOrig?Math.max(0,Math.min(1,(cw||0)/i.weightOrig)):null;}
 function weekMonday(dateStr){const d=new Date(dateStr+"T00:00:00");const off=(d.getDay()+6)%7;d.setDate(d.getDate()-off);return d.toISOString().slice(0,10);}
 // consumption events from consecutive readings
@@ -895,8 +897,7 @@ function filteredItems(){
   const q=state.search.trim().toLowerCase();
   let arr=liveItems().filter(i=>{
     if(state.filterCat!=="all"&&i.category!==state.filterCat)return false;
-    if(state.filterStatus==="use"&&i.usedUp)return false;
-    if(state.filterStatus==="done"&&!i.usedUp)return false;
+    if(state.filterStatus!=="all"&&statusOf(i)!==state.filterStatus)return false;
     if(state.filterPan==="in"&&!i.inPan)return false;
     if(state.filterPan==="out"&&i.inPan)return false;
     if(q&&![i.name,i.brand,catLabel(i.category),i.category,i.purchased,i.usedUp||""].join(" ").toLowerCase().includes(q))return false;
@@ -933,7 +934,7 @@ function reviewSection(){
       <td class="num">${lastC==null?"—":lastC+" "+u}</td>
       <td class="l">${pcell}</td>
       <td>${i.inPan?`<span class="pill pan">${t("pan.yes")}</span>`:`<span class="sub">${t("pan.no")}</span>`}</td>
-      <td><span class="pill ${done?"done":"use"}">${done?t("st.done"):t("st.use")}</span></td>
+      <td><span class="pill ${statusOf(i)}">${t("st."+statusOf(i))}</span></td>
       <td class="l">${catLabel(i.category)}</td>
       <td class="num">${gbp(i.cost)}</td>
     </tr>`;}).join("");
@@ -941,7 +942,7 @@ function reviewSection(){
     <div class="rowflex">
       <label class="field" style="flex:1;min-width:140px">${t("search.ph")}<input id="searchBox" value="${state.search.replace(/"/g,"&quot;")}"></label>
       <label class="field">${t("filter.cat")}<select id="fCat">${optTag("all",t("filter.all"),state.filterCat)}${CATEGORIES.map(c=>optTag(c,catLabel(c),state.filterCat)).join("")}</select></label>
-      <label class="field">${t("filter.status")}<select id="fStatus">${optTag("all",t("filter.all"),state.filterStatus)}${optTag("use",t("st.use"),state.filterStatus)}${optTag("done",t("st.done"),state.filterStatus)}</select></label>
+      <label class="field">${t("filter.status")}<select id="fStatus">${optTag("all",t("filter.all"),state.filterStatus)}${optTag("use",t("st.use"),state.filterStatus)}${optTag("done",t("st.done"),state.filterStatus)}${optTag("declutter",t("st.declutter"),state.filterStatus)}</select></label>
       <label class="field">${t("filter.pan")}<select id="fPan">${optTag("all",t("filter.all"),state.filterPan)}${optTag("in",t("filter.inpan"),state.filterPan)}${optTag("out",t("filter.notpan"),state.filterPan)}</select></label>
       <label class="field">${t("sort.by")}<select id="sortBy">${optTag("purchased",t("sort.purchased"),state.sortBy)}${optTag("usedup",t("sort.usedup"),state.sortBy)}${optTag("cost",t("sort.cost"),state.sortBy)}${optTag("name",t("sort.name"),state.sortBy)}${optTag("remaining",t("sort.remaining"),state.sortBy)}</select></label>
       <button class="btn icon" id="sortDir" title="${t("sort.dir")}">${state.sortDir==="asc"?"↑":"↓"}</button>
@@ -975,6 +976,7 @@ function editModal(){
       <label class="field">${t("f.usedup")}<input id="e_usedup" value="${ymToInput(i.usedUp)}" placeholder="YYYYMM · ${t("usedup.hint")}"></label>
       <label class="field">${t("f.worig")}<input type="number" step="0.1" id="e_worig" value="${i.weightOrig??""}"></label>
       <label class="field">${t("f.net")}<span style="display:flex;gap:6px"><input type="number" step="0.1" id="e_net" value="${i.netWeight??""}" placeholder="${t("f.nethint")}" style="flex:1"><select id="e_unit" style="max-width:88px">${["ml","g","oz"].map(x=>`<option value="${x}" ${(i.unit||"g")===x?"selected":""}>${x}</option>`).join("")}</select></span></label>
+      <label class="field">${t("f.status")}<select id="e_status">${[["use","st.use"],["done","st.done"],["declutter","st.declutter"]].map(x=>`<option value="${x[0]}" ${statusOf(i)===x[0]?"selected":""}>${t(x[1])}</option>`).join("")}</select></label>
       <label class="field checkfield"><input type="checkbox" id="e_inpan" ${i.inPan?"checked":""}> ${t("f.inpanq")}</label>
     </div>
     <div class="row" style="display:flex;gap:10px;align-items:center;margin-top:16px">
@@ -1147,7 +1149,7 @@ function wire(){
     i.name=document.getElementById("e_name").value.trim();i.category=document.getElementById("e_cat").value;i.brand=document.getElementById("e_brand").value.trim();
     i.qty=parseFloat(document.getElementById("e_qty").value)||1;i.cost=parseFloat(document.getElementById("e_cost").value)||0;
     i.purchased=p||"";i.usedUp=u||null;i.weightOrig=isNaN(wo)?null:wo;const nw=parseFloat(document.getElementById("e_net").value);i.netWeight=isNaN(nw)?null:nw;i.unit=document.getElementById("e_unit").value.trim()||"ml";
-    i.inPan=document.getElementById("e_inpan").checked;state.edit=null;render();
+    i.status=document.getElementById("e_status").value;i.inPan=document.getElementById("e_inpan").checked;state.edit=null;render();
   };
 
   // weight modal
@@ -1173,7 +1175,7 @@ function wire(){
 }
 
 
-function exportRows(){const rows=liveItems().map(i=>[i.name,i.brand,i.category,i.qty,i.cost,i.purchased,i.usedUp||"",i.unit,i.weightOrig,currentWeight(i),i.inPan?"Yes":"No",i.usedUp?"Finished":"In use"]);return {filename:"project-pan",headers:["Item","Brand","Category","Qty","Cost","Purchased","Used up","Unit","Original weight","Current weight","In pan","Status"],rows};}
+function exportRows(){const rows=liveItems().map(i=>[i.name,i.brand,i.category,i.qty,i.cost,i.purchased,i.usedUp||"",i.unit,i.weightOrig,currentWeight(i),i.inPan?"Yes":"No",t("st."+statusOf(i))]);return {filename:"project-pan",headers:["Item","Brand","Category","Qty","Cost","Purchased","Used up","Unit","Original weight","Current weight","In pan","Status"],rows};}
 function exportSheets(){
   const items=liveItems();
   const itemRows=items.map(i=>[i.name,i.brand,i.category,i.qty,i.cost,i.purchased,i.usedUp||"",i.unit,i.weightOrig,currentWeight(i),i.inPan?"Yes":"No",i.usedUp?"Finished":"In use"]);
